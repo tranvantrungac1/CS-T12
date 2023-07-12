@@ -4,7 +4,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        Screen screen = new Screen();
+        ScreenUser screen = new ScreenUser();
         screen.PrintLoginScreen();
     }
 }

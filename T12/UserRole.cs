@@ -1,7 +1,7 @@
 ﻿using System;
 namespace T12
 {
-	public enum EmployeeRole
+	public enum UserRole
 	{
 		MANAGER,
 		USER
