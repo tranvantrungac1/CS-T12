@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using T12.DTO;
 
-namespace T12
+namespace T12.DAL
 {
     public class DeviceDAL
     {

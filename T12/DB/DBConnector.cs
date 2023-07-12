@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Data.SqlClient;
 
-namespace T12
+namespace T12.DB
 {
-	public class DBConnector
+    public class DBConnector
     {
-		
-		public string Database { get; set; }
+
+        public string Database { get; set; }
         public string Server { get; set; }
         public string User { get; set; }
         public string Password { get; set; }
@@ -35,7 +35,7 @@ namespace T12
 
         private string BuildConnectionString()
         {
-            return String.Format("Data Source={0},1433;Initial Catalog={1};User Id={2};Password={3}",
+            return string.Format("Data Source={0},1433;Initial Catalog={1};User Id={2};Password={3}",
                 Server, Database, User, Password);
         }
     }

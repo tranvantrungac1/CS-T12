@@ -2,45 +2,46 @@
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.IO;
+using T12.DAL;
 using T12.DTO;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace T12
+namespace T12.BL
 {
     public class UserManager
-	{
-		UserDAL userDAL;
-		public UserManager()
-		{
-            this.userDAL = new UserDAL();
+    {
+        UserDAL userDAL;
+        public UserManager()
+        {
+            userDAL = new UserDAL();
         }
 
-		public User? Login(string username, string password)
-		{
+        public User? Login(string username, string password)
+        {
             return userDAL.SelectByUsernameAndPassword(username, password);
-		}
+        }
 
-		public List<User> Find(string key)
-		{
-			// 1. key - id
-			// 2. key - username | fullname
-			int id;
+        public List<User> Find(string key)
+        {
+            // 1. key - id
+            // 2. key - username | fullname
+            int id;
             bool success = int.TryParse(key, out id);
-			if (success)
-			{
+            if (success)
+            {
                 List<User> users = new List<User>();
                 User? user = userDAL.SelectById(id);
-				users.Add(user);
-				return users;
+                users.Add(user);
+                return users;
             }
-			else
-			{
+            else
+            {
                 return userDAL.SelectByKey(key);
             }
         }
 
-		public void Import(string filePath)
-		{
+        public void Import(string filePath)
+        {
             StreamReader reader = new StreamReader(filePath);
             try
             {
@@ -52,7 +53,7 @@ namespace T12
                     string username = tokens[0];
                     string fullname = tokens[1];
                     string password = tokens[2];
-                    UserRole role = (UserRole) Convert.ToInt32(tokens[3]);
+                    UserRole role = (UserRole)Convert.ToInt32(tokens[3]);
                     userDAL.Insert(new User(0, username, fullname, Utils.Hash(password), role));
                 }
             }
@@ -77,7 +78,7 @@ namespace T12
                     writer.Flush();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -88,13 +89,14 @@ namespace T12
         }
 
         public int AddNew(User u)
-		{
-			return userDAL.Insert(u);
-		}
-
-        public int UpdateFullname(User u)
         {
-            return userDAL.UpdateFullname(u);
+            return userDAL.Insert(u);
+        }
+
+        public int UpdateFullname(int id, string fullname)
+        {
+            
+            return userDAL.UpdateFullname(id, fullname);
         }
 
         public int UpdatePassword(User u)

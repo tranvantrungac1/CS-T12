@@ -1,4 +1,6 @@
-﻿namespace T12;
+﻿using T12.PL;
+
+namespace T12;
 
 class Program
 {

@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using T12.DTO;
+using T12.DAL;
 
-namespace T12
+namespace T12.BL
 {
     public class DeviceManager
     {
@@ -14,7 +15,7 @@ namespace T12
 
         public DeviceManager()
         {
-            this.deviceDAL = new DeviceDAL();
+            deviceDAL = new DeviceDAL();
         }
         public List<Device> Find(string key)
         {
